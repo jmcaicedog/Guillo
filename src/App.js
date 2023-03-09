@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Display } from "react-7-segment-display";
+import { useState } from "react";
 
 function App() {
+  const [value, setValue] = useState("1980");
+
+  const handlePlus = () => {
+    setValue((parseInt(value) + 1).toString());
+  };
+  const handleMinus = () => {
+    setValue((parseInt(value) - 1).toString());
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      style={{
+        backgroundColor: "#000000",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <h1>CARZA S.A.</h1>
+      <Display height="150" count="4" value={value} />
+      <button onClick={handlePlus}>+</button>
+      <button onClick={handleMinus}>-</button>
     </div>
   );
 }
