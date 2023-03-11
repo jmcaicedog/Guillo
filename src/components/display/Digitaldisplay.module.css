@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css?family=Orbitron");
+
+.displayado {
+  background-color: black;
+  border: solid 10px red;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px;
+  margin-top: 10px;
+}
+
+.displayContainer {
+  border-radius: 10px;
+}
+
+.red {
+  display: flex;
+  align-items: center;
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Orbitron";
+  margin-left: -30px;
+  margin-top: 24px;
+}

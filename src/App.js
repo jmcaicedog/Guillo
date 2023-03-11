@@ -1,30 +1,51 @@
-import "./App.css";
-import { Display } from "react-7-segment-display";
-import { useState } from "react";
+import Digitaldisplay from "./components/display/Digitaldisplay";
+import Orders from "./components/orders/Orders";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
 
 function App() {
-  const [value, setValue] = useState("1980");
-
-  const handlePlus = () => {
-    setValue((parseInt(value) + 1).toString());
-  };
-  const handleMinus = () => {
-    setValue((parseInt(value) - 1).toString());
-  };
-
+  const mdTheme = createTheme({
+    palette: {
+      primary: {
+        light: "#F8C192",
+        main: "#E95725",
+        dark: "#FAB429",
+        contrastText: "#fff",
+      },
+      secondary: {
+        light: "#ff7961",
+        main: "#FAB429",
+        dark: "#ba000d",
+        contrastText: "#000",
+      },
+    },
+  });
   return (
-    <div
-      style={{
-        backgroundColor: "#000000",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <h1>CARZA S.A.</h1>
-      <Display height="150" count="4" value={value} />
-      <button onClick={handlePlus}>+</button>
-      <button onClick={handleMinus}>-</button>
-    </div>
+    <ThemeProvider theme={mdTheme}>
+      <Box sx={{ display: "flex" }}>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
+          <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
+            <Grid container spacing={3}>
+              <Orders />
+              <Digitaldisplay />
+            </Grid>
+          </Container>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 }
 
