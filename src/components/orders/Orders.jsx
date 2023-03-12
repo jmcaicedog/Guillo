@@ -8,10 +8,12 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
-//import Box from "@mui/material/Box";
-//import Modal from "@mui/material/Modal";
+import { useFirebaseApp, useFirestoreCollection } from "reactfire";
+import "firebase/firestore";
 
 export default function Orders() {
+  const firebaseApp = useFirebaseApp();
+  //const videosRef = firebaseApp.firestore().collection("Orders");
   return (
     <>
       <Grid item xs={12} md={8} lg={9}>
@@ -21,9 +23,11 @@ export default function Orders() {
             <TableHead>
               <TableRow>
                 <TableCell>Matrícula</TableCell>
-                <TableCell>Nombre</TableCell>
-                <TableCell>Correo electrónico</TableCell>
-                <TableCell align="center">Cupones registrados</TableCell>
+                <TableCell>Peso inicial</TableCell>
+                <TableCell>Peso final</TableCell>
+                <TableCell>Peso neto</TableCell>
+                <TableCell>Tipo</TableCell>
+                <TableCell align="center">Valor</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -36,12 +40,14 @@ export default function Orders() {
                         //handleOpen();
                       }}
                     >
-                      4615672
+                      KVN-153
                     </Button>
                   </TableCell>
-                  <TableCell>Pedro</TableCell>
-                  <TableCell>pedro@pedro.com</TableCell>
-                  <TableCell align="center">12</TableCell>
+                  <TableCell>1200 Kg</TableCell>
+                  <TableCell>820 Kg</TableCell>
+                  <TableCell>380 Kg</TableCell>
+                  <TableCell>Mixto</TableCell>
+                  <TableCell align="center">₡1200</TableCell>
                 </TableRow>
               </>
             </TableBody>
