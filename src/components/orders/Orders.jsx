@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 import StarFirebase from "../firebase/config/firebaseConfig";
 import moment from "moment";
+import { useEffect, useState } from "react";
 import {
   ref,
   set,
@@ -17,20 +18,26 @@ import {
   remove,
   child,
   onValue,
+  getDatabase,
 } from "firebase/database";
 
-export default function Orders() {
-  const db = StarFirebase();
-  const dataArray = [];
+const db = StarFirebase();
 
-  const ordersRef = ref(db, "Orders/" + moment().format("YYYY-MM-DD/"));
-  onValue(ordersRef, (snapshot) => {
-    const data = snapshot.val();
-    for (const [key, value] of Object.entries(data)) {
-      dataArray.push({ key, value });
-    }
-    //console.log(dataArray);
-  });
+export default function Orders() {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const ordersRef = ref(db, "Orders/" + moment().format("YYYY-MM-DD/"));
+    return onValue(ordersRef, (snapshot) => {
+      const data = snapshot.val();
+      if (snapshot.exists()) {
+        Object.values(data).map((order) => {
+          setOrders((orders) => [...orders, order]);
+        });
+      }
+      console.log(orders);
+    });
+  }, []);
 
   return (
     <>
@@ -49,9 +56,9 @@ export default function Orders() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {dataArray.map((data) => {
+              {orders.map((data, id) => {
                 return (
-                  <TableRow>
+                  <TableRow {...data} key={id}>
                     <TableCell>
                       <Button
                         onClick={() => {
