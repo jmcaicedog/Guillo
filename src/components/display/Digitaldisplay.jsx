@@ -14,20 +14,18 @@ export default function DigitalDisplay() {
   //   setValue((parseInt(value) - 1).toString());
   // };
   return (
-    <Grid item xs={12} md={4} lg={3}>
-      <Paper
-        sx={{
-          p: 0,
-          display: "flex",
-          flexDirection: "row",
-          border: "10px solid red",
-          backgroundColor: "black",
-          color: "red",
-        }}
-      >
-        <Display backgroundColor="black" height="70" count="5" value={value} />
-        <div className={style.red}>Kg</div>
-      </Paper>
-    </Grid>
+    <Paper
+      sx={{
+        p: 0,
+        display: "flex",
+        flexDirection: "row",
+        border: "10px solid red",
+        backgroundColor: "black",
+        color: "red",
+      }}
+    >
+      <Display backgroundColor="black" height="60" count="5" value={value} />
+      <div className={style.red}>Kg</div>
+    </Paper>
   );
 }

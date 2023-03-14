@@ -3,7 +3,9 @@ import Orders from "./components/orders/Orders";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
+import Ingreso from "./components/firebase/ingreso/Ingreso";
 
 function App() {
   const mdTheme = createTheme({
@@ -40,7 +42,10 @@ function App() {
           <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               <Orders />
-              <Digitaldisplay />
+              <Stack spacing={2} ml={2}>
+                <Digitaldisplay />
+                <Ingreso />
+              </Stack>
             </Grid>
           </Container>
         </Box>
