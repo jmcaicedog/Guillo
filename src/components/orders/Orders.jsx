@@ -4,40 +4,36 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
+import ScaleIcon from "@mui/icons-material/Scale";
+import PrintIcon from "@mui/icons-material/Print";
 import StarFirebase from "../firebase/config/firebaseConfig";
 import moment from "moment";
 import { useEffect, useState } from "react";
-import {
-  ref,
-  set,
-  get,
-  update,
-  remove,
-  child,
-  onValue,
-  getDatabase,
-} from "firebase/database";
+import { ref, onValue } from "firebase/database";
 
 const db = StarFirebase();
 
 export default function Orders() {
-  const [orders, setOrders] = useState([]);
-
+  const [orders, setOrders] = useState({ tableData: [] });
+  const hoy = moment().format("YYYY-MM-DD/");
   useEffect(() => {
-    const ordersRef = ref(db, "Orders/" + moment().format("YYYY-MM-DD/"));
-    return onValue(ordersRef, (snapshot) => {
-      const data = snapshot.val();
-      if (snapshot.exists()) {
-        Object.values(data).map((order) => {
-          setOrders((orders) => [...orders, order]);
-        });
-      }
-      console.log(orders);
+    const ordersRef = ref(db, "Orders/" + hoy);
+
+    onValue(ordersRef, (snapshot) => {
+      let records = [];
+      snapshot.forEach((childSnapshot) => {
+        let keyname = childSnapshot.key;
+        let data = childSnapshot.val();
+        records.push({ key: keyname, data: data });
+      });
+      setOrders({ tableData: records });
     });
-  }, []);
+    console.log(orders);
+  });
 
   return (
     <>
@@ -56,9 +52,9 @@ export default function Orders() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map((data, id) => {
+              {orders.tableData.map((data, id) => {
                 return (
-                  <TableRow {...data} key={id}>
+                  <TableRow key={id}>
                     <TableCell>
                       <Button
                         onClick={() => {
@@ -66,14 +62,34 @@ export default function Orders() {
                           //handleOpen();
                         }}
                       >
-                        KVN-153
+                        {data.key}
                       </Button>
                     </TableCell>
-                    <TableCell>1200 Kg</TableCell>
-                    <TableCell>820 Kg</TableCell>
-                    <TableCell>380 Kg</TableCell>
-                    <TableCell>Mixto</TableCell>
-                    <TableCell align="center">₡1200</TableCell>
+                    <TableCell>{data.data.peso0}</TableCell>
+                    <TableCell>
+                      {data.data.peso1 ? (
+                        data.data.peso1
+                      ) : (
+                        <IconButton color="primary">
+                          <ScaleIcon fontSize="small" />
+                        </IconButton>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {data.data.peso1
+                        ? data.data.peso1 - data.data.peso0
+                        : "--"}
+                    </TableCell>
+                    <TableCell>{data.data.tipo}</TableCell>
+                    <TableCell align="center">
+                      {data.data.peso1 ? (
+                        data.data.valor
+                      ) : (
+                        <IconButton color="primary">
+                          <PrintIcon fontSize="small" />
+                        </IconButton>
+                      )}
+                    </TableCell>
                   </TableRow>
                 );
               })}

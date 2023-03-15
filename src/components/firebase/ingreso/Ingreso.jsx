@@ -4,29 +4,21 @@ import Button from "@mui/material/Button";
 import StarFirebase from "../config/firebaseConfig";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import {
-  ref,
-  set,
-  get,
-  update,
-  remove,
-  child,
-  getDatabase,
-  onValue,
-} from "firebase/database";
+import { ref, set } from "firebase/database";
 
 import moment from "moment";
 
 const Ingreso = () => {
   const [state, setState] = useState({
-    db: "",
+    matricula: "",
     peso0: "",
     peso1: "",
     pesoNeto: "",
     tipo: "",
     valor: "",
     fecha: "",
-    hora: "",
+    hora0: "",
+    hora1: "",
   });
   const [matricula, setMatricula] = useState("");
 
@@ -37,68 +29,24 @@ const Ingreso = () => {
   const insertData = () => {
     const db = state.db;
     const data = {
-      matricula: matricula,
       peso0: "1200",
-      peso1: "1440",
-      pesoNeto: "240",
+      peso1: "",
+      pesoNeto: "",
       tipo: "Mixto",
-      valor: "3200",
+      valor: "",
       fecha: "13/02/2023",
-      hora: "10:35",
+      hora0: "10:35",
+      hora1: "",
     };
     set(
       ref(
         db,
-        "Orders/" +
-          moment().format("YYYY-MM-DD/") +
-          data.matricula +
-          "/" +
-          moment().format("h:mm:ss")
+        "Orders/" + moment().format("YYYY-MM-DD") + "/" + matricula + "/"
       ),
       data
     )
       .then(() => {
         alert("Dato guardado");
-      })
-      .catch((error) => {
-        alert("Error: " + error);
-      });
-  };
-
-  const updateData = () => {
-    const db = state.db;
-    const data = {
-      peso0: "1200",
-      peso1: "1440",
-      pesoNeto: "240",
-      tipo: "Mixto",
-      valor: "3200",
-      fecha: "13/02/2023",
-      hora: "10:35",
-    };
-    set(ref(db, "Orders/" + moment().format("YYYY-MM-DD/h:mm:ss")), data)
-      .then(() => {
-        alert("Dato actualizado");
-      })
-      .catch((error) => {
-        alert("Error: " + error);
-      });
-  };
-
-  const removeData = () => {
-    const db = state.db;
-    const data = {
-      peso0: "1200",
-      peso1: "1440",
-      pesoNeto: "240",
-      tipo: "Mixto",
-      valor: "3200",
-      fecha: "13/02/2023",
-      hora: "10:35",
-    };
-    set(ref(db, "Orders/" + moment().format("YYYY-MM-DD/h:mm:ss")), data)
-      .then(() => {
-        alert("Dato borrado");
       })
       .catch((error) => {
         alert("Error: " + error);
