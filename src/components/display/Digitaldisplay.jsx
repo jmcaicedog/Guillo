@@ -1,6 +1,5 @@
 import { Display } from "react-7-segment-display";
 import React from "react";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { useState } from "react";
 import style from "../display/Digitaldisplay.module.css";
