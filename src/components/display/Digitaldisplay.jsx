@@ -5,7 +5,7 @@ import { useState } from "react";
 import style from "../display/Digitaldisplay.module.css";
 
 export default function DigitalDisplay() {
-  const [value] = useState("53");
+  const [value] = useState("853");
   // const handlePlus = () => {
   //   setValue((parseInt(value) + 1).toString());
   // };
@@ -20,7 +20,7 @@ export default function DigitalDisplay() {
         flexDirection: "row",
         border: "10px solid red",
         backgroundColor: "black",
-        color: "red",
+        color: "#E95725",
       }}
     >
       <Display backgroundColor="black" height="60" count="5" value={value} />

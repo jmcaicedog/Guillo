@@ -9,6 +9,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { ref, set } from "firebase/database";
+import Swal from "sweetalert2";
 
 import moment from "moment";
 
@@ -31,30 +32,50 @@ const Ingreso = () => {
   }, []);
 
   const insertData = () => {
-    const db = state.db;
-    const data = {
-      peso0: "1200",
-      peso1: "",
-      pesoNeto: "",
-      tipo: tipo,
-      valor: "",
-      fecha: moment().format("YYYY-MM-DD"),
-      hora0: moment().format("h:mm:ss"),
-      hora1: "",
-    };
-    set(
-      ref(
-        db,
-        "Orders/" + moment().format("YYYY-MM-DD") + "/" + matricula + "/"
-      ),
-      data
-    )
-      .then(() => {
-        alert("Dato guardado");
-      })
-      .catch((error) => {
-        alert("Error: " + error);
+    if (matricula && tipo) {
+      const db = state.db;
+      const data = {
+        peso0: "1200",
+        peso1: "",
+        pesoNeto: "",
+        tipo: tipo,
+        valor: "",
+        fecha: moment().format("YYYY-MM-DD"),
+        hora0: moment().format("h:mm:ss"),
+        hora1: "",
+      };
+      set(
+        ref(
+          db,
+          "Orders/" + moment().format("YYYY-MM-DD") + "/" + matricula + "/"
+        ),
+        data
+      )
+        .then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Orden abierta",
+            confirmButtonColor: "#E95725",
+          });
+        })
+        .catch((error) => {
+          Swal.fire({
+            icon: "success",
+            title: "Ocurrió un error:",
+            text: error,
+          });
+        });
+      setMatricula("");
+      setTipo("");
+    } else {
+      Swal.fire({
+        icon: "error",
+        iconColor: "#E95725",
+        confirmButtonColor: "#E95725",
+        title: "Debes ingresar la matrícula y el tipo de chatarra",
       });
+      //alert("Debes ingresar la matrícula y seleccionar el tipo de chatarra");
+    }
   };
 
   const handleChangeM = (e) => {
