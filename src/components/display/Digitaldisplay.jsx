@@ -6,6 +6,10 @@ import style from "../display/Digitaldisplay.module.css";
 
 export default function DigitalDisplay() {
   const [value] = useState("853");
+  if ("serial" in navigator) {
+    console.log("Awesome, The serial port is supported.");
+    // The Web Serial API is supported.
+  }
   // const handlePlus = () => {
   //   setValue((parseInt(value) + 1).toString());
   // };

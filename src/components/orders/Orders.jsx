@@ -32,8 +32,7 @@ export default function Orders() {
       });
       setOrders({ tableData: records });
     });
-    console.log(orders);
-  });
+  }, [hoy]);
 
   return (
     <>
