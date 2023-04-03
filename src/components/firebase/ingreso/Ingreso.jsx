@@ -37,7 +37,7 @@ const Ingreso = ({ value }) => {
       const db = state.db;
       const data = {
         peso0: value,
-        peso1: "",
+        peso1: 0,
         pesoNeto: "",
         tipo: tipo,
         valor: "",

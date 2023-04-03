@@ -47,7 +47,7 @@ function App() {
               spacing={3}
               sx={{ display: "flex", justifyContent: "center" }}
             >
-              <Orders />
+              <Orders value={value} />
               <Stack spacing={2} ml={2}>
                 <Digitaldisplay value={value} setValue={setValue} />
                 <Ingreso value={value} />

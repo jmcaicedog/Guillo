@@ -14,7 +14,7 @@ export default function DigitalDisplay({ value, setValue }) {
   }, [setValue]);
 
   if ("serial" in navigator) {
-    console.log("Awesome, The serial port is supported.");
+    //console.log("Awesome, The serial port is supported.");
     // The Web Serial API is supported.
   }
   return (
