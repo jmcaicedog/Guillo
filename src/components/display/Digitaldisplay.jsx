@@ -22,6 +22,7 @@ export default function DigitalDisplay() {
         p: 0,
         display: "flex",
         flexDirection: "row",
+        justifyContent: "center",
         border: "10px solid red",
         backgroundColor: "black",
         color: "#E95725",

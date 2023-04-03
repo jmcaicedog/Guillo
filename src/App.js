@@ -26,7 +26,7 @@ function App() {
   });
   return (
     <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box
           component="main"
           sx={{
@@ -39,8 +39,12 @@ function App() {
             overflow: "auto",
           }}
         >
-          <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
+          <Container maxWidth="xl" sx={{ mt: 6, mb: 4, padding: 0 }}>
+            <Grid
+              container
+              spacing={3}
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
               <Orders />
               <Stack spacing={2} ml={2}>
                 <Digitaldisplay />

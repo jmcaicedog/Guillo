@@ -12,6 +12,7 @@ import { ref, set } from "firebase/database";
 import Swal from "sweetalert2";
 
 import moment from "moment";
+import Ticket from "../../ticket/Ticket";
 
 const Ingreso = () => {
   const [state, setState] = useState({
@@ -106,8 +107,18 @@ const Ingreso = () => {
         noValidate
         autoComplete="off"
       >
-        <FormControl variant="outlined" fullWidth>
+        <FormControl
+          variant="outlined"
+          fullWidth
+          sx={{
+            display: "flex",
+            alignSelf: "center",
+            alignItems: "center",
+            paddingTop: "20px",
+          }}
+        >
           <TextField
+            sx={{ display: "flex", alignSelf: "center", width: "100%" }}
             id="matricula"
             value={matricula}
             name="matricula"
@@ -116,8 +127,15 @@ const Ingreso = () => {
             onChange={handleChangeM}
           />
         </FormControl>
-        <FormControl variant="outlined" fullWidth>
-          <InputLabel id="demo-simple-select-label">
+        <FormControl
+          variant="outlined"
+          fullWidth
+          sx={{ display: "flex", alignSelf: "center" }}
+        >
+          <InputLabel
+            id="demo-simple-select-label"
+            sx={{ display: "flex", alignSelf: "center" }}
+          >
             Tipo de Chatarra
           </InputLabel>
           <Select
@@ -127,15 +145,34 @@ const Ingreso = () => {
             onChange={handleChangeT}
             label="Tipo de Chatarra"
           >
-            <MenuItem value={"Sólida"}>Sólida</MenuItem>
+            <MenuItem
+              value={"Sólida"}
+              sx={{ display: "flex", alignSelf: "center" }}
+            >
+              Sólida
+            </MenuItem>
             <MenuItem value={"Mixta"}>Mixta</MenuItem>
             <MenuItem value={"Carrocería"}>Carrocería</MenuItem>
           </Select>
         </FormControl>
-        <FormControl variant="outlined" fullWidth>
-          <Button variant="contained" onClick={() => insertData()}>
+        <FormControl
+          variant="outlined"
+          fullWidth
+          sx={{ display: "flex", alignSelf: "center" }}
+        >
+          <Button
+            variant="contained"
+            onClick={() => insertData()}
+            sx={{
+              display: "flex",
+              alignSelf: "center",
+              width: "100%",
+              marginBottom: "20px",
+            }}
+          >
             ABRIR ÓRDEN
           </Button>
+          <Ticket />
         </FormControl>
       </Box>
     </Paper>
