@@ -6,8 +6,10 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
 import Ingreso from "./components/firebase/ingreso/Ingreso";
+import { useState } from "react";
 
 function App() {
+  const [value, setValue] = useState(0);
   const mdTheme = createTheme({
     palette: {
       primary: {
@@ -47,8 +49,8 @@ function App() {
             >
               <Orders />
               <Stack spacing={2} ml={2}>
-                <Digitaldisplay />
-                <Ingreso />
+                <Digitaldisplay value={value} setValue={setValue} />
+                <Ingreso value={value} />
               </Stack>
             </Grid>
           </Container>

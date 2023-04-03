@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import React from "react";
 import logo from "./logo_carza.png";
 
-export default function Ticket() {
+export default function Ticket({ matricula, value }) {
   const URLPlugin = "http://localhost:8000";
   const conector = new ConectorPluginV3(URLPlugin);
   console.log(logo);

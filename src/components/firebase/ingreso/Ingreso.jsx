@@ -14,7 +14,7 @@ import Swal from "sweetalert2";
 import moment from "moment";
 import Ticket from "../../ticket/Ticket";
 
-const Ingreso = () => {
+const Ingreso = ({ value }) => {
   const [state, setState] = useState({
     peso0: "",
     peso1: "",
@@ -36,7 +36,7 @@ const Ingreso = () => {
     if (matricula && tipo) {
       const db = state.db;
       const data = {
-        peso0: "1200",
+        peso0: value,
         peso1: "",
         pesoNeto: "",
         tipo: tipo,
