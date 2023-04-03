@@ -1,21 +1,22 @@
 import { Display } from "react-7-segment-display";
-import React from "react";
+import React, { useEffect } from "react";
 import Paper from "@mui/material/Paper";
-import { useState } from "react";
 import style from "../display/Digitaldisplay.module.css";
 
-export default function DigitalDisplay() {
-  const [value] = useState("853");
+export default function DigitalDisplay({ value, setValue }) {
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomNumber =
+        Math.floor(Math.random() * (50000 - 20000 + 1)) + 20000;
+      setValue(randomNumber);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [setValue]);
+
   if ("serial" in navigator) {
     console.log("Awesome, The serial port is supported.");
     // The Web Serial API is supported.
   }
-  // const handlePlus = () => {
-  //   setValue((parseInt(value) + 1).toString());
-  // };
-  // const handleMinus = async () => {
-  //   setValue((parseInt(value) - 1).toString());
-  // };
   return (
     <Paper
       sx={{
