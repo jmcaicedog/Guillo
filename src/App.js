@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
 import Ingreso from "./components/firebase/ingreso/Ingreso";
+import Rates from "./components/rates/Rates";
 import { useState } from "react";
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
               <Stack spacing={2} ml={2}>
                 <Digitaldisplay value={value} setValue={setValue} />
                 <Ingreso value={value} />
+                <Rates />
               </Stack>
             </Grid>
           </Container>
